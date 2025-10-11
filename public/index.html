@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ========================================== -->
+    <!-- 📦 HEAD SECTION - METADATA & RESOURCES -->
+    <!-- ========================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> PhoenixFlix - Vision Board </title>
+    
+    <!-- 🎨 STYLESHEETS -->
+    <link rel="stylesheet" href="/styles.css">
+    
+    <!-- 📝 GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    
+    <!-- 📱 PWA MANIFEST -->
+    <link rel="manifest" href="/app.webmanifest">
+    
+    <!-- 🖼️ FAVICONS -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.png">
+    <link rel="icon" type="image/jpeg" sizes="48x48" href="/images/PhoenixFlix.jpeg">
+    
+    <!-- 📜 JAVASCRIPT -->
+    <script src="https://unpkg.com/@simplewebauthn/browser/dist/bundle/index.umd.min.js" defer></script>
+    <script src="/app.js?v=11" type="module" defer></script>
+    <base href="/">
+</head>
+<body>
+    <!-- ========================================== -->
+    <!-- 🧭 HEADER SECTION - NAVIGATION & SEARCH -->
+    <!-- ========================================== -->
+    <header>
+        <h1><img src="/images/PhoenixFlix.jpeg" height="75" alt="PhoenixFlix"></h1>
+        <nav>
+            <ul>
+                <li><a class="navlink" href="/">Movies 🎥</a></li>
+                <li><a class="navlink" href="/lds">LDS Content ⛪</a></li>
+                <li><a class="navlink phoenixflix-brand" href="/manifesto"><span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> 🔥</a></li>
+                <li><a class="navlink" href="/guestbook">Guestbook 📝</a></li>
+                <li><a class="navlink admin-link" href="/admin/guestbook">Admin 🔧</a></li>
+                <!-- <li><a class="navlink" href="/admin/guestbook">Admin 🔧</a></li> -->
+                <li><a class="navlink" href="/account/favorites">Favorites 💜</a></li>
+                <li><a class="navlink" href="/account/watchlist">Watchlist 🎬</a></li>
+                <li><a class="navlink" href="/account/">My Account 🔑</a></li>
+            </ul>
+        </nav>
+        <div>
+            <form onsubmit="app.search(event)">
+                <input type="search" id="search-input" name="search" placeholder="Search videos">
+                <!-- search placeholder for different pages -->
+            </form>
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- 📄 MAIN CONTENT AREA -->
+    <!-- ========================================== -->
+    <main>
+        <!-- Free Hosting Warning -->
+        <div id="loading-warning" class="loading-warning">
+            <div class="warning-content">
+                <div class="warning-icon">⏳</div>
+                <div class="warning-text">
+                    <h3>Friendly Reminder</h3>
+                    <p>Free fullstack database may take up to 50 seconds to load initially, please be patient. Thanks!</p>
+                </div>
+                <button id="dismiss-warning" class="dismiss-btn">Got it!</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- 🚨 MODAL DIALOGS & OVERLAYS -->
+    <!-- ========================================== -->
+    <dialog id="alert-modal">
+        <h3>Error</h3>
+        <p>There was an error loading the page</p>
+        <button onclick="app.closeError()">Ok</button>
+    </dialog>
+
+    <!-- ========================================== -->
+    <!-- 🎭 PAGE TEMPLATES - DYNAMIC CONTENT -->
+    <!-- ========================================== -->
+     <template id="template-home">
+        <!-- ========================================== -->
+        <!-- 📺 WELCOME HEADER BOX -->
+        <!-- ========================================== -->
+        <section class="welcome-header-box">
+            <h1 class="welcome-phoenixflix">Welcome to <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span></h1>
+            <p class="subtitle">Discover inspiring LDS contents and movies and forum</p>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 📺 TV AND BULLETIN BOARD LAYOUT -->
+        <!-- ========================================== -->
+        <div class="tv-bulletin-container">
+            <!-- LEFT SIDE: TV Frame with LDS Conference Video -->
+                <section class="tv-frame-section">
+                    <div class="tv-frame">
+                        <div class="tv-screen">
+                            <youtube-embed data-url="https://www.youtube.com/watch?v=7rcGkeFV3Tw"></youtube-embed>
+                        </div>
+                        <div class="tv-controls">
+                            <div class="tv-knob"></div>
+                            <div class="tv-knob"></div>
+                            <div class="tv-knob"></div>
+                        </div>
+                        <div class="tv-stand"></div>
+                    </div>
+                </section>
+                
+            <!-- RIGHT SIDE: Status Board/Bulletin -->
+                <section class="status-board-section">
+                    <div class="status-board">
+                        <div class="status-header">
+                            <h3 class="phoenixflix-brand">📋 <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> Status</h3>
+                            <div class="status-pins">
+                                <div class="pin"></div>
+                                <div class="pin"></div>
+                                <div class="pin"></div>
+                                <div class="pin"></div>
+                            </div>
+                        </div>
+                        <div class="status-content">
+                            <div class="status-grid">
+                                <div class="status-item">
+                                    <span class="status-label">Website</span>
+                                    <span class="status-value blocked">✗</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Server</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">App</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Database</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Netflix-Style</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                
+                                <div class="status-item">
+                                    <span class="status-label">Adult</span>
+                                    <span class="status-value blocked">✗</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">PG-13</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                
+                                <div class="status-item">
+                                    <span class="status-label">Pirate</span>
+                                    <span class="status-value blocked">✗</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Administrator</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                
+                                <div class="status-item">
+                                    <span class="status-label">Cost</span>
+                                    <span class="status-value blocked">✗</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Passion</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Education</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                
+                                <div class="status-item">
+                                    <span class="status-label">Id-Theft</span>
+                                    <span class="status-value blocked">✗</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">AUTH-Token</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+
+                                <div class="status-item">
+                                    <span class="status-label">Privacy</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Watchlist</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Passkey</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Forum</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Fullstack</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Secure</span>
+                                    <span class="status-value verified">✓</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">And ?</span>
+                                    <span class="status-value maybe">?</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        <!-- End TV and Bulletin Container -->
+        
+               
+        <!-- 🔥 PHOENIX LETTER STANDALONE SECTION
+        <section class="phoenix-letter-standalone">
+            <div class="phoenix-letter-container-standalone">
+                <img src="/images/Phoenix_Letter.png" alt="The PhoenixFlix Manifesto Letter" class="phoenix-letter-image-standalone">
+            </div>
+        </section> -->
+        
+        <!-- NOTE - LDS Movies Section commented out -->
+        <!-- LDS Movies Section -->
+        <!-- <section class="vertical-scroll" id="lds-movies">
+            <h2>Latter-day Saints Movies & Contents</h2>
+            <ul></ul>
+        </section> -->
+
+        <!-- Japanese section (default) -->
+        <section class="vertical-scroll" id="Japanese">
+            <h2>See the world in another view ... Learn a new language</h2>
+            <ul></ul>
+        </section>
+        <!-- Language section (when language is selected) -->
+        <section class="vertical-scroll" id="language" style="display: none;">
+            <h2>Learn a new language</h2>
+            <ul></ul>
+        </section>
+        <section class="vertical-scroll" id="top-10">
+            <h2>This Week's Top Movies</h2>
+            <ul></ul>
+        </section>
+        <section class="vertical-scroll" id="random">
+            <h2>Something to watch today</h2>
+            <ul></ul>
+        </section>        
+     </template>
+     <template id="template-movie-details">
+        <article id="movie">
+            <h2><animated-loading elements="2"></animated-loading></h2>
+            <h3></h3>
+            <header>
+                <img src="" alt="Poster">
+                <youtube-embed id="trailer">YouTube loading...</youtube-embed>
+                <section id="actions" data-id="">
+                    <dl id="metadata">
+                    </dl>
+                    <button id="btnFavorites">Add to Favorites</button>
+                    <button id="btnWatchlist">Add to Watchlist</button>    
+                </section>
+            </header>
+            <ul id="genres"></ul>
+            <p id="overview"></p>
+            <ul id="cast"></ul>
+        </article>
+    </template>
+    <template id="template-movies">
+        <section>
+            <div id="search-header">
+                <h2></h2>
+                <section id="filters">
+                    <select id="filter" onchange="app.searchFilterChange(this.value)">
+                        <option>Filter by Genre</option>                        
+                    </select>
+                    <select id="order" onchange="app.searchOrderChange(this.value)">
+                        <option value="popularity">Sort by Popularity</option>
+                        <option value="score">Sort by Score</option>
+                        <option value="date">Sort by Release Date</option>
+                        <option value="name">Sort by Name</option>
+                    </select>
+                </section>
+            </div>
+            <ul id="movies-result">
+                <animated-loading data-elements="5"
+                    data-width="150px" data-height="220px">
+                </animated-loading> 
+            </ul>
+        </section>
+    </template>
+
+    <!-- ========================================== -->
+    <!-- 👤 USER AUTHENTICATION TEMPLATES -->
+    <!-- ========================================== -->
+    
+    <!-- 📝 REGISTRATION FORM -->
+    <template id="template-register">
+        <section>
+            <h2>Register a New Account</h2>
+            <form onsubmit="app.register(event)">
+                <label for="register-name">Name</label>
+                <input id="register-name" type="text" required autocomplete="name">
+
+                <label for="register-email">E-mail</label>
+                <input id="register-email" required type="email" autocomplete="email">
+                
+                <label for="register-password">Password</label>
+                <input id="register-password" type="password" required autocomplete="new-password">
+
+                <label for="register-password-confirmation">Repeat your Password</label>
+                <input id="register-password-confirmation" required type="password">
+                
+                <button>Register</button>
+
+                <p>If you already have an account, please 
+                    <a href="/account/login">log in</a>.</p>
+            </form>
+        </section>
+    </template>
+
+    <!-- 🔐 LOGIN FORM -->
+    <template id="template-login">
+        <section>
+            <h2>Log in</h2>
+            <form onsubmit="app.login(event)">
+                <label for="login-email">E-mail</label>
+                <input id="login-email" required type="email" 
+                       autocomplete="email webauthn">
+                
+                <label for="login-password">Password</label>
+                <input id="login-password" type="password" autocomplete="current-password">
+                
+                <button>Log In</button>
+                <button type="button" onclick="app.loginWithPasskey()">Login with Passkey</button>
+
+
+                <p>If you don't have an account, please 
+                    <a href="/account/register">register</a>.</p>
+            </form>
+        </section>
+    </template>
+
+    <!-- 👤 ACCOUNT DASHBOARD -->
+    <template id="template-account">
+        <section id="account">
+            <h2>You are Logged In</h2>
+
+            <button onclick="app.logout()">Log out</button>
+            <button onclick="app.Router.go('/account/favorites')">Your Favorites</button>
+            <button onclick="app.Router.go('/account/watchlist')">Your Watchlist</button>
+            <button onclick="app.addNewPasskey()">Add a New Passkey for faster login</button>
+        </section>
+    </template>
+
+    <!-- 📚 COLLECTION PAGES -->
+    <template id="template-collection">
+        <section>
+            <ul id="movies-result">
+                <animated-loading data-elements="5"
+                    data-width="150px" data-height="220px">
+                </animated-loading> 
+            </ul>
+        </section>
+    </template>
+
+    <!-- 🔥 PHOENIX MANIFESTO PAGE -->
+    <template id="template-manifesto">
+        <section class="phoenix-manifesto-page">
+            <!-- Phoenix Background Elements -->
+            <div class="phoenix-bg-elements">
+                <div class="phoenix-flame phoenix-flame-1"></div>
+                <div class="phoenix-flame phoenix-flame-2"></div>
+                <div class="phoenix-flame phoenix-flame-3"></div>
+                <div class="phoenix-ember phoenix-ember-1"></div>
+                <div class="phoenix-ember phoenix-ember-2"></div>
+                <div class="phoenix-ember phoenix-ember-3"></div>
+            </div>
+            
+            <!-- Manifesto Header -->
+            <div class="manifesto-page-header">
+                <h1 class="phoenixflix-brand"><img src="/images/PhoenixFlix.jpeg" alt="PhoenixFlix Logo" class="manifesto-title-logo"> <span class="manifesto-theme-text">The</span> <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> <span class="manifesto-theme-text">Manifesto</span></h1>
+                <div class="phoenix-flame-icon">
+                    <img src="/images/PhoenixFlix.jpeg" alt="PhoenixFlix Logo" class="phoenix-logo">
+                </div>
+                <p class="manifesto-subtitle">Our Vision for Digital Spiritual Learning and Personal Growth</p>
+                <div class="manifesto-nav">
+                    <button onclick="app.Router.go('/')" class="back-home-btn">
+                        <span class="btn-icon">🏠</span>
+                        Back to Home
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Main Manifesto Content -->
+            <div class="manifesto-page-content">
+                <div class="manifesto-text-content">
+                    <div class="manifesto-intro-section">
+                        <h2 class="phoenixflix-brand"> <span class="manifesto-theme-text">Welcome to the</span> <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> <span class="manifesto-theme-text">Manifesto</span></h2>
+                        <p class="manifesto-intro-text">
+                            <strong>Your Digital Library for Spiritual Learning and Personal Growth!</strong>
+                        </p>
+                        <p>
+                            This platform is designed for educational enrichment, personal study, and the joy of collecting meaningful content. 
+                            We honor the sacred nature of these teachings and respect the intellectual property of all creators.
+                        </p>
+                    </div>
+                    
+                    <div class="manifesto-features">
+                        <h3>🌟 Our Core Features</h3>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">📚</div>
+                                <h4>Educational Collection</h4>
+                                <p>Curated content for personal study and spiritual growth</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🎬</div>
+                                <h4>Netflix-Style Experience</h4>
+                                <p>Seamless streaming with modern interface design</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🔐</div>
+                                <h4>Secure Authentication</h4>
+                                <p>Passkey-based security for your peace of mind</p>
+                            </div>
+                            <!-- <div class="feature-card">
+                                <div class="feature-icon">💬</div>
+                                <h4>Community Forum</h4>
+                                <p>Connect with like-minded individuals for discussion</p>
+                            </div> -->
+                        </div>
+                    </div>
+                    
+                    <div class="manifesto-mission">
+                        <h3>🎯 Our Mission</h3>
+                        <p>
+                            <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> represents the rebirth of digital spiritual learning - rising from the ashes of traditional 
+                            content consumption to create a platform that honors both modern technology and timeless wisdom. 
+                            We believe in the power of education, the importance of community, and the sacred nature of spiritual growth.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phoenix Letter Standalone Section -->
+            <div class="manifesto-phoenix-letter-section">
+                <div class="manifesto-phoenix-letter-container">
+                    <img src="/images/Phoenix_Letter.png" alt="The PhoenixFlix Manifesto Letter" class="manifesto-phoenix-letter-image">
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- 🏛️ LDS CONTENT PAGE -->
+    <template id="template-lds">
+        <section class="lds-page">
+            <div class="lds-header">
+                <div class="lds-header-content">
+                    <img src="images/TheLDSlogo.png" alt="LDS Logo" class="lds-header-logo">
+                    <div class="lds-header-text">
+                        <h1>Latter-day Saints Content</h1>
+                        <p>Discover inspiring talks, music, and videos from The Church of Jesus Christ of Latter-day Saints</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hardcoded Disclaimer Section for LDSPage -->
+            <section class="lds-page-disclaimer">
+                <div class="disclaimer-header">
+                    <h3>📚 Educational Collection & Personal Study</h3>
+                </div>
+                <div class="disclaimer-content">
+                    <p class="disclaimer-intro">
+                        <strong>Welcome to <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> - Your Digital Library for Spiritual Learning and Personal Growth!</strong> 
+                        This platform is designed for educational enrichment, personal study, and the joy of collecting meaningful content. 
+                        We honor the sacred nature of these teachings and respect the intellectual property of all creators.
+                    </p>
+                    
+                    <div class="disclaimer-sources">
+                        <h4>🌐 Official Sources for Complete Teachings</h4>
+                        <p>For authoritative teachings, official statements, and complete spiritual guidance, we encourage you to visit these trusted sources:</p>
+                        <ul class="official-links">
+                            <li>
+                                <a href="https://www.churchofjesuschrist.org/?lang=eng" target="_blank" rel="noopener">
+                                    🏛️ The Church of Jesus Christ of Latter-day Saints
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/tbn" target="_blank" rel="noopener">
+                                    📺 Trinity Broadcasting Network (TBN)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://cbn.com/" target="_blank" rel="noopener">
+                                    📻 Christian Broadcasting Network (CBN)
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="disclaimer-legal">
+                        <h4>⚖️ Educational Purpose & Respect</h4>
+                        <p>
+                            <strong>Educational Mission:</strong> <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> serves as a curated digital collection for educational purposes, personal study, and hobby enthusiasts. 
+                            All content remains the intellectual property of their respective creators and organizations. 
+                            We do not claim ownership of any materials and encourage users to access official sources for complete teachings and authorized materials.
+                        </p>
+                        <p>
+                            <em>This platform is designed to inspire learning, foster spiritual growth, and support personal study in a respectful and educational manner.</em>
+                        </p>
+                        <p>
+                            <strong>Please Note:</strong> Due to copyright laws and respect for the LDS Church, <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> can be used as a collection of samples or introductions. 
+                            All other movies and videos are from public databases available on the internet. This is for educational purposes and fan hobbies only.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Daily Features (GetTopLDS) - COMMENTED OUT -->
+            <!--
+            <section class="lds-section">
+                <h2>Daily Features</h2>
+                <div class="horizontal-scroll-container">
+                    <ul id="lds-daily-features" class="horizontal-scroll-list">
+                        <animated-loading data-elements="3" data-width="200px" data-height="300px">
+                        </animated-loading>
+                    </ul>
+                </div>
+            </section>
+            -->
+
+            <!-- LDS Features (GetLDSContent with search) -->
+            <section class="lds-section">
+                <h2>🎺LDS Features</h2>
+                <div class="horizontal-scroll-container">
+                    <ul id="lds-features" class="horizontal-scroll-list">
+                        <animated-loading data-elements="4" data-width="200px" data-height="300px">
+                        </animated-loading>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Bible Videos (GetRandomLDS) -->
+            <section class="lds-section">
+                <h2>📖 Bible Videos</h2>
+                <div class="horizontal-scroll-container">
+                    <ul id="lds-bible-videos" class="horizontal-scroll-list">
+                        <animated-loading data-elements="4" data-width="200px" data-height="300px">
+                        </animated-loading>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Christian Songs (GetRandomLDS) -->
+            <section class="lds-section">
+                <h2>🎤 Christian Songs</h2>
+                <div class="horizontal-scroll-container">
+                    <ul id="lds-christian-songs" class="horizontal-scroll-list">
+                        <animated-loading data-elements="4" data-width="200px" data-height="300px">
+                        </animated-loading>
+                    </ul>
+                </div>
+            </section>
+        </section>
+    </template>
+
+    <!-- 🎬 LDS CONTENT DETAIL PAGE -->
+    <template id="template-lds-detail">
+        <article id="lds-content" class="lds-detail-page">
+            <div class="lds-detail-header">
+                <h1 id="lds-title"><animated-loading elements="1"></animated-loading></h1>
+                <div class="lds-meta">
+                    <span id="lds-speaker" class="speaker"></span>
+                    <span id="lds-conference-session" class="conference"></span>
+                    <span id="lds-spiritual-rating" class="rating"></span>
+                </div>
+            </div>
+            
+            <div class="lds-detail-content">
+                <div class="lds-logo-column">
+                    <div id="lds-thumbnail" class="lds-logo-container">
+                        <animated-loading elements="1" data-width="400px" data-height="225px">
+                        </animated-loading>
+                    </div>
+                    <div id="lds-youtube-embed" class="youtube-container">
+                        <enhanced-youtube-embed data-url="" data-retry-count="3">
+                        </enhanced-youtube-embed>
+                    </div>
+                </div>
+                
+                <div class="lds-info">
+                    <div class="lds-description">
+                        <h3>Description</h3>
+                        <p id="lds-description-text"></p>
+                    </div>
+                    
+                    <div class="lds-scripture" id="lds-scripture-section" style="display: none;">
+                        <h3>Scripture Reference</h3>
+                        <p id="lds-scripture-reference"></p>
+                    </div>
+                    
+                    <div class="lds-actions">
+                        <button id="btnLDSFavorite" class="action-btn">Add to Favorites</button>
+                        <button id="btnLDSWatchlist" class="action-btn">Add to Watchlist</button>
+                        <button id="btnLDSScripture" class="action-btn" style="display: none;">View Scripture</button>
+                    </div>
+                    
+                    <div class="lds-stats">
+                        <div class="stat">
+                            <span class="stat-label">Views:</span>
+                            <span id="lds-view-count" class="stat-value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Likes:</span>
+                            <span id="lds-like-count" class="stat-value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Duration:</span>
+                            <span id="lds-duration" class="stat-value">0 min</span>
+                        </div>
+                    </div>
+                    
+                    <!-- ========================================== -->
+                    <!-- 📜 EDUCATIONAL DISCLAIMER SECTION -->
+                    <!-- ========================================== -->
+                    <div class="lds-content-disclaimer">
+                        <div class="disclaimer-header">
+                            <h3>📚 Educational Collection & Personal Study</h3>
+                        </div>
+                        <div class="disclaimer-content">
+                            <p class="disclaimer-intro">
+                                <strong>Welcome to <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> - Your Digital Library for Spiritual Learning and Personal Growth!</strong> 
+                                This platform is designed for educational enrichment, personal study, and the joy of collecting meaningful content. 
+                                We honor the sacred nature of these teachings and respect the intellectual property of all creators.
+                            </p>
+                            
+                            <div class="disclaimer-sources">
+                                <h4>🌐 Official Sources for Complete Teachings</h4>
+                                <p>For authoritative teachings, official statements, and complete spiritual guidance, we encourage you to visit these trusted sources:</p>
+                                <ul class="official-links">
+                                    <li>
+                                        <a href="https://www.churchofjesuschrist.org/?lang=eng" target="_blank" rel="noopener">
+                                            🏛️ The Church of Jesus Christ of Latter-day Saints
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.youtube.com/tbn" target="_blank" rel="noopener">
+                                            📺 Trinity Broadcasting Network (TBN)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://cbn.com/" target="_blank" rel="noopener">
+                                            📻 Christian Broadcasting Network (CBN)
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="disclaimer-legal">
+                                <h4>⚖️ Educational Purpose & Respect</h4>
+                                <p>
+                                    <strong>Educational Mission:</strong> <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> serves as a curated digital collection for educational purposes, personal study, and hobby enthusiasts. 
+                                    All content remains the intellectual property of their respective creators and organizations. 
+                                    We do not claim ownership of any materials and encourage users to access official sources for complete teachings and authorized materials.
+                                </p>
+                                <p>
+                                    <em>This platform is designed to inspire learning, foster spiritual growth, and support personal study in a respectful and educational manner.</em>
+                                </p>
+                                <p>
+                                    <strong>Please Note:</strong> Due to copyright laws and respect for the LDS Church, <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> can be used as a collection of samples or introductions. 
+                                    All other movies and videos are from public databases available on the internet. This is for educational purposes and fan hobbies only.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <!-- ========================================== -->
+    <!-- 🔥 PHOENIX MANIFESTO TEASER -->
+    <!-- ========================================== -->
+     <section class="phoenix-teaser-section">
+        <div class="phoenix-teaser-container">
+            <div class="phoenix-teaser-content">
+                <div class="phoenix-teaser-text">
+                    <h2 class="phoenixflix-brand"><img src="/images/PhoenixFlix.jpeg" alt="PhoenixFlix Logo" class="teaser-title-logo"> The <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> Manifesto</h2>
+                    <p>Discover our vision for digital spiritual learning and personal growth</p>
+                    <div class="phoenix-teaser-highlights">
+                        <span class="teaser-highlight">📚 Educational Collection</span>
+                        <span class="teaser-highlight">� Community Forum</span>
+                        <span class="teaser-highlight">🎬 Netflix-Style Experience</span>
+                        <span class="teaser-highlight">🔐 Secure Authentication</span>
+                    </div>
+                             <button class="phoenix-teaser-btn" onclick="app.Router.go('/manifesto')">
+                             Read Full Manifesto
+                             <img src="/images/PhoenixFlix.jpeg" alt="PhoenixFlix Logo" class="teaser-btn-logo">
+                             </button>
+                     </div>
+                <div class="phoenix-teaser-image">
+                    <img src="/images/Phoenix_Letter.png" alt="PhoenixFlix Manifesto Preview" class="teaser-preview">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 🦶 FOOTER SECTION -->
+    <!-- ========================================== -->
+    <footer>
+        <p>(C) <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> ::: https://github.com/PhoenixWeaver ::: </p>
+        <p>© 2025, Ben Tran. All rights reserved.</p>
+        
+        <!-- Handwritten Disclaimer -->
+        <div class="footer-disclaimer">
+            <p class="handwritten-text">Not a missionary. Not a leader. Just a loner convert.</p>
+            <p class="handwritten-text">Not a hero. Not a programmer. Just a fun goer.</p>
+        </div>
+    </footer>
+</body>
+</html>
