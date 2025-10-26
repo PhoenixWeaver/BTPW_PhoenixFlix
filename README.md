@@ -177,10 +177,10 @@ PhoenixFlix implements **optimistic locking** to handle concurrent database oper
 - Concurrent guestbook submissions
 - Admin moderation actions
 
-![Optimistic Locking Sequence Diagram](BT_OutputSamples/Optimistic_Locking_Sequence_Diagram.png)
+![Optimistic Locking Sequence Diagram](OutputSamples/Optimistic_Locking_Sequence_Diagram.png)
 *Figure 1: Optimistic locking sequence for concurrent user updates*
 
-![Optimistic Locking Flowchart](BT_OutputSamples/Optimistic_Locking_Flowchart.png)
+![Optimistic Locking Flowchart](OutputSamples/Optimistic_Locking_Flowchart.png)
 *Figure 2: Flowchart showing version-based conflict resolution*
 
 For detailed implementation, see: `BT_Builder/GoRoutines_Builder/`
@@ -307,7 +307,7 @@ PhoenixFlix/
 
 PhoenixFlix implements a comprehensive account management system with enterprise-level security features.
 
-![Account Management Architecture](BT_OutputSamples/Architecture_AccountManagement.png)
+![Account Management Architecture](OutputSamples/Architecture_AccountManagement.png)
 *Figure 3: Complete account management architecture*
 
 ### **Email Verification Flow**
@@ -324,7 +324,7 @@ PhoenixFlix implements a comprehensive account management system with enterprise
 4. **Password Update**: User sets new password via token
 5. **Account Secured**: Password is updated and token invalidated
 
-![Authentication Flow](BT_OutputSamples/Authentication_Flow.png)
+![Authentication Flow](OutputSamples/Authentication_Flow.png)
 *Figure 4: Complete authentication flow including email verification and password reset*
 
 ### **Email Infrastructure**
@@ -505,14 +505,14 @@ All deployment guides are organized in **[BT_Builder/Deployment_V2/](BT_Builder/
   - Provides recommendations
 
 ### **Architecture Diagrams**
-Located in `BT_OutputSamples/`:
+Located in `OutputSamples/`:
 - **Optimistic_Locking_Sequence_Diagram.png**: Detailed sequence diagram for concurrent operations
 - **Optimistic_Locking_Flowchart.png**: Visual flowchart of race condition prevention
 - **Architecture_AccountManagement.png**: Complete account management architecture
 - **Authentication_Flow.png**: Full authentication flow including email verification
 
 ### **Application Screenshots**
-Located in `BT_OutputSamples/PhoenixFlix_OutputSamples/`:
+Located in `OutputSamples/`:
 
 #### **Desktop (PC)**
 - Homepage and navigation
