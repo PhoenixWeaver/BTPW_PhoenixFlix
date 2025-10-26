@@ -1,0 +1,274 @@
+/*
+===============================================================================
+🐦 ::: PhoenixFlix - Multi-Purpose Movies & Christian Streaming Platform :::
+🔥 with dual database architecture, WebAuthn authentication, and family-friendly streaming experience.
+===============================================================================
+Author: Ben Tran (https://github.com/PhoenixWeaver)
+Email: thephoenixflix@gmail.com
+Website: https://bit.ly/thephoenixflix
+===============================================================================
+*/
+
+.language-filter {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.language-filter h3 {
+    color: white;
+    margin: 0 0 15px 0;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.language-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.language-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+    backdrop-filter: blur(10px);
+}
+
+.language-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.language-btn.active {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border-color: white;
+    font-weight: bold;
+}
+
+.language-info {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9em;
+}
+
+.language-trailer {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #e9ecef;
+}
+
+.trailer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.trailer-header h4 {
+    margin: 0;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.language-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.language-controls label {
+    font-weight: 500;
+    color: #555;
+    font-size: 0.9em;
+}
+
+.language-controls select {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.trailer-container {
+    margin-bottom: 15px;
+}
+
+.trailer-info {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.language-preference {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 4px solid #007bff;
+}
+
+.language-preference label {
+    font-weight: 500;
+    color: #333;
+    margin-right: 10px;
+}
+
+.language-preference select {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+}
+
+.media-options {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 4px solid #28a745;
+}
+
+.media-options h4 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 1em;
+}
+
+.audio-options, .subtitle-options {
+    margin-bottom: 15px;
+}
+
+.audio-options label, .subtitle-options label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.audio-options input[type="radio"], 
+.subtitle-options input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.movie-card[data-language="ko"] {
+    border-left: 4px solid #ff6b6b;
+}
+
+.movie-card[data-language="ja"] {
+    border-left: 4px solid #4ecdc4;
+}
+
+.movie-card[data-language="es"] {
+    border-left: 4px solid #45b7d1;
+}
+
+.movie-card[data-language="fr"] {
+    border-left: 4px solid #96ceb4;
+}
+
+.movie-card[data-language="de"] {
+    border-left: 4px solid #feca57;
+}
+
+.movie-card[data-language="zh"] {
+    border-left: 4px solid #ff9ff3;
+}
+
+.language-badge {
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 500;
+    margin: 2px;
+}
+
+.language-badge.original {
+    background: #28a745;
+}
+
+.language-badge.popular {
+    background: #ffc107;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .language-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .language-btn {
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+    }
+    
+    .trailer-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .language-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+.language-transition {
+    transition: all 0.3s ease;
+}
+
+.language-transition.changing {
+    opacity: 0.7;
+    transform: scale(0.98);
+}
+
+.language-btn:focus,
+.language-controls select:focus,
+.language-preference select:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+@media (prefers-contrast: high) {
+    .language-btn {
+        border-width: 3px;
+    }
+    
+    .language-btn.active {
+        background: white;
+        color: black;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .language-btn,
+    .language-transition {
+        transition: none;
+    }
+}
