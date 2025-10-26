@@ -1,0 +1,185 @@
+{
+  "Section Block": {
+    "prefix": "sec",
+    "scope": "go",
+    "body": [
+      "//SECTION - ${1:number}: ${2:name}",
+      "// ${3:description}",
+      "$0",
+      "//!SECTION - ${2:name}"
+    ],
+    "description": "Create a section block with start and end markers"
+  },
+  "Step Comment": {
+    "prefix": "step",
+    "scope": "go",
+    "body": ["// STEP ${1:number}: ${2:description}"],
+    "description": "Add a numbered step comment"
+  },
+  "Important Note": {
+    "prefix": "imp",
+    "scope": "go",
+    "body": ["// IMPORTANT: ${1:message}"],
+    "description": "Add an important comment that should not be overlooked"
+  },
+  "TODO Item": {
+    "prefix": "todo",
+    "scope": "go",
+    "body": ["// TODO: ${1:task}"],
+    "description": "Add a TODO item for future work"
+  },
+  "FIXME Item": {
+    "prefix": "fixme",
+    "scope": "go",
+    "body": ["// FIXME: ${1:issue}"],
+    "description": "Mark code with a known issue that needs fixing"
+  },
+  "Note Comment": {
+    "prefix": "note",
+    "scope": "go",
+    "body": ["// NOTE: ${1:information}"],
+    "description": "Add a general note or explanation"
+  },
+  "Review Comment": {
+    "prefix": "review",
+    "scope": "go",
+    "body": ["// REVIEW: ${1:question}"],
+    "description": "Mark code that needs review or discussion"
+  },
+  "Related Reference": {
+    "prefix": "rel",
+    "scope": "go",
+    "body": ["// RELATED: ${1:file_path}"],
+    "description": "Add a reference to related code in another file"
+  },
+  "Stub Implementation": {
+    "prefix": "stub",
+    "scope": "go",
+    "body": ["// STUB: ${1:description}", "$0"],
+    "description": "Mark placeholder or incomplete code"
+  },
+  "Hack Workaround": {
+    "prefix": "hack",
+    "scope": "go",
+    "body": ["// HACK: ${1:explanation}"],
+    "description": "Mark temporary or non-ideal solutions"
+  },
+  "Function Documentation": {
+    "prefix": "fundoc",
+    "scope": "go",
+    "body": [
+      "// ${1:FunctionName} ${2:brief description}",
+      "//",
+      "// STEP 1: ${3:first step}",
+      "// STEP 2: ${4:second step}",
+      "//",
+      "// IMPORTANT: ${5:critical information}",
+      "// RELATED: ${6:related files}",
+      "//",
+      "// Parameters:",
+      "//   ${7:param1} - ${8:description}",
+      "//",
+      "// Returns:",
+      "//   ${9:return description}",
+      "//",
+      "// Example:",
+      "//   ${10:usage example}",
+      "func ${1:FunctionName}($11) $12 {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Create a fully documented function with steps and details"
+  },
+  "Struct Documentation": {
+    "prefix": "structdoc",
+    "scope": "go",
+    "body": [
+      "// ${1:StructName} ${2:description}",
+      "//",
+      "// IMPORTANT: ${3:critical information}",
+      "// RELATED: ${4:related files}",
+      "type ${1:StructName} struct {",
+      "\t${5:// Field documentation}",
+      "\t${6:FieldName} ${7:FieldType} ${8:// inline comment}",
+      "\t$0",
+      "}"
+    ],
+    "description": "Create a documented struct with field descriptions"
+  },
+  "Handler Method": {
+    "prefix": "handler",
+    "scope": "go",
+    "body": [
+      "// ${1:HandlerName} handles ${2:description}",
+      "//",
+      "// STEP 1: ${3:Parse and validate request}",
+      "// STEP 2: ${4:Process business logic}",
+      "// STEP 3: ${5:Return response}",
+      "//",
+      "// IMPORTANT: ${6:requirements or constraints}",
+      "//",
+      "// Endpoint: ${7:HTTP_METHOD /path/to/endpoint}",
+      "// Auth: ${8:Required/Optional/None}",
+      "func (h *${9:Handler}) ${1:HandlerName}(w http.ResponseWriter, r *http.Request) {",
+      "\t// STEP 1: ${3}",
+      "\t$0",
+      "}"
+    ],
+    "description": "Create a documented HTTP handler with steps"
+  },
+  "Repository Method": {
+    "prefix": "repomethod",
+    "scope": "go",
+    "body": [
+      "// ${1:MethodName} ${2:description}",
+      "//",
+      "// STEP 1: ${3:Validate input}",
+      "// STEP 2: ${4:Execute query}",
+      "// STEP 3: ${5:Process results}",
+      "//",
+      "// IMPORTANT: ${6:database or query constraints}",
+      "// RELATED: ${7:related methods or tables}",
+      "func (r *${8:Repository}) ${1:MethodName}($9) ($10, error) {",
+      "\t// STEP 1: ${3}",
+      "\t$0",
+      "}"
+    ],
+    "description": "Create a documented repository method with steps"
+  },
+  "Error Handling Block": {
+    "prefix": "errhandle",
+    "scope": "go",
+    "body": [
+      "if err != nil {",
+      "\t// ${1:FIXME/TODO/NOTE}: ${2:error handling comment}",
+      "\t${3:h.Logger}.Error(\"${4:error message}\", err)",
+      "\treturn ${5:nil, }err",
+      "}"
+    ],
+    "description": "Create an error handling block with logging"
+  },
+  "Chapter Header": {
+    "prefix": "chapter",
+    "scope": "go",
+    "body": [
+      "/*",
+      "===============================================================================",
+      "Chapter ${1:number}: ${2:Chapter Title}",
+      "===============================================================================",
+      "${3:Description of what this chapter covers}",
+      "",
+      "Key Components:",
+      "- ${4:component 1}",
+      "- ${5:component 2}",
+      "",
+      "Dependencies:",
+      "- ${6:dependency 1}",
+      "",
+      "IMPORTANT: ${7:critical information}",
+      "===============================================================================",
+      "*/"
+    ],
+    "description": "Create a chapter header comment block"
+  }
+}
+

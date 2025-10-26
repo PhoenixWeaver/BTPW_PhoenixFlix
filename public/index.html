@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ========================================== -->
-    <!-- 📦 HEAD SECTION - METADATA & RESOURCES -->
-    <!-- ========================================== -->
+
+<!-- ===============================================================================
+🐦 ::: PhoenixFlix - Multi-Purpose Movies & Christian Streaming Platform :::
+🔥 with dual database architecture, WebAuthn authentication, and family-friendly streaming experience.
+===============================================================================
+Author: Ben Tran (https://github.com/PhoenixWeaver)
+Email: thephoenixflix@gmail.com
+Website: https://bit.ly/thephoenixflix
+=============================================================================== -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> PhoenixFlix - Vision Board </title>
-    
-    <!-- 🎨 STYLESHEETS -->
-    <link rel="stylesheet" href="/styles.css">
-    
-    <!-- 📝 GOOGLE FONTS -->
+
+    <link rel="stylesheet" href="/styles.css?v=28">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
-    
-    <!-- 📱 PWA MANIFEST -->
+
     <link rel="manifest" href="/app.webmanifest">
-    
-    <!-- 🖼️ FAVICONS -->
+
     <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.png">
     <link rel="icon" type="image/jpeg" sizes="48x48" href="/images/PhoenixFlix.jpeg">
-    
-    <!-- 📜 JAVASCRIPT -->
+
     <script src="https://unpkg.com/@simplewebauthn/browser/dist/bundle/index.umd.min.js" defer></script>
-    <script src="/app.js?v=11" type="module" defer></script>
+    <script src="/app.js?v=28" type="module" defer></script>
     <base href="/">
 </head>
 <body>
-    <!-- ========================================== -->
-    <!-- 🧭 HEADER SECTION - NAVIGATION & SEARCH -->
-    <!-- ========================================== -->
+
     <header>
+
         <h1><img src="/images/PhoenixFlix.jpeg" height="75" alt="PhoenixFlix"></h1>
+        <div class="install-hint" id="install-hint" onclick="app.installApp()">📱 Click here or logo to install app</div>
+
         <nav>
             <ul>
                 <li><a class="navlink" href="/">Movies 🎥</a></li>
@@ -41,25 +44,23 @@
                 <li><a class="navlink phoenixflix-brand" href="/manifesto"><span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> 🔥</a></li>
                 <li><a class="navlink" href="/guestbook">Guestbook 📝</a></li>
                 <li><a class="navlink admin-link" href="/admin/guestbook">Admin 🔧</a></li>
-                <!-- <li><a class="navlink" href="/admin/guestbook">Admin 🔧</a></li> -->
+                
                 <li><a class="navlink" href="/account/favorites">Favorites 💜</a></li>
                 <li><a class="navlink" href="/account/watchlist">Watchlist 🎬</a></li>
                 <li><a class="navlink" href="/account/">My Account 🔑</a></li>
             </ul>
         </nav>
+
         <div>
             <form onsubmit="app.search(event)">
                 <input type="search" id="search-input" name="search" placeholder="Search videos">
-                <!-- search placeholder for different pages -->
+                
             </form>
         </div>
     </header>
 
-    <!-- ========================================== -->
-    <!-- 📄 MAIN CONTENT AREA -->
-    <!-- ========================================== -->
     <main>
-        <!-- Free Hosting Warning -->
+
         <div id="loading-warning" class="loading-warning">
             <div class="warning-content">
                 <div class="warning-icon">⏳</div>
@@ -72,32 +73,21 @@
         </div>
     </main>
 
-    <!-- ========================================== -->
-    <!-- 🚨 MODAL DIALOGS & OVERLAYS -->
-    <!-- ========================================== -->
     <dialog id="alert-modal">
         <h3>Error</h3>
         <p>There was an error loading the page</p>
         <button onclick="app.closeError()">Ok</button>
     </dialog>
 
-    <!-- ========================================== -->
-    <!-- 🎭 PAGE TEMPLATES - DYNAMIC CONTENT -->
-    <!-- ========================================== -->
      <template id="template-home">
-        <!-- ========================================== -->
-        <!-- 📺 WELCOME HEADER BOX -->
-        <!-- ========================================== -->
+
         <section class="welcome-header-box">
             <h1 class="welcome-phoenixflix">Welcome to <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span></h1>
             <p class="subtitle">Discover inspiring LDS contents and movies and forum</p>
         </section>
 
-        <!-- ========================================== -->
-        <!-- 📺 TV AND BULLETIN BOARD LAYOUT -->
-        <!-- ========================================== -->
         <div class="tv-bulletin-container">
-            <!-- LEFT SIDE: TV Frame with LDS Conference Video -->
+            
                 <section class="tv-frame-section">
                     <div class="tv-frame">
                         <div class="tv-screen">
@@ -111,8 +101,7 @@
                         <div class="tv-stand"></div>
                     </div>
                 </section>
-                
-            <!-- RIGHT SIDE: Status Board/Bulletin -->
+
                 <section class="status-board-section">
                     <div class="status-board">
                         <div class="status-header">
@@ -170,17 +159,17 @@
                                     <span class="status-value blocked">✗</span>
                                 </div>
                                 <div class="status-item">
-                                    <span class="status-label">Passion</span>
+                                    <span class="status-label">Race Conditions</span>
                                     <span class="status-value verified">✓</span>
                                 </div>
                                 <div class="status-item">
-                                    <span class="status-label">Education</span>
+                                    <span class="status-label">SSR & PWA</span>
                                     <span class="status-value verified">✓</span>
                                 </div>
                                 
                                 <div class="status-item">
-                                    <span class="status-label">Id-Theft</span>
-                                    <span class="status-value blocked">✗</span>
+                                    <span class="status-label">Privacy</span>
+                                    <span class="status-value verified">✓</span>
                                 </div>
                                 <div class="status-item">
                                     <span class="status-label">AUTH-Token</span>
@@ -188,15 +177,15 @@
                                 </div>
 
                                 <div class="status-item">
-                                    <span class="status-label">Privacy</span>
-                                    <span class="status-value verified">✓</span>
+                                    <span class="status-label">Id-Theft</span>
+                                    <span class="status-value blocked">✗</span>
                                 </div>
                                 <div class="status-item">
                                     <span class="status-label">Watchlist</span>
                                     <span class="status-value verified">✓</span>
                                 </div>
                                 <div class="status-item">
-                                    <span class="status-label">Passkey</span>
+                                    <span class="status-label">Passkeys (WebAuthn)</span>
                                     <span class="status-value verified">✓</span>
                                 </div>
                                 <div class="status-item">
@@ -208,7 +197,7 @@
                                     <span class="status-value verified">✓</span>
                                 </div>
                                 <div class="status-item">
-                                    <span class="status-label">Secure</span>
+                                    <span class="status-label">CrossDomain Server</span>
                                     <span class="status-value verified">✓</span>
                                 </div>
                                 <div class="status-item">
@@ -220,29 +209,12 @@
                     </div>
                 </section>
             </div>
-        <!-- End TV and Bulletin Container -->
-        
-               
-        <!-- 🔥 PHOENIX LETTER STANDALONE SECTION
-        <section class="phoenix-letter-standalone">
-            <div class="phoenix-letter-container-standalone">
-                <img src="/images/Phoenix_Letter.png" alt="The PhoenixFlix Manifesto Letter" class="phoenix-letter-image-standalone">
-            </div>
-        </section> -->
-        
-        <!-- NOTE - LDS Movies Section commented out -->
-        <!-- LDS Movies Section -->
-        <!-- <section class="vertical-scroll" id="lds-movies">
-            <h2>Latter-day Saints Movies & Contents</h2>
-            <ul></ul>
-        </section> -->
 
-        <!-- Japanese section (default) -->
         <section class="vertical-scroll" id="Japanese">
             <h2>See the world in another view ... Learn a new language</h2>
             <ul></ul>
         </section>
-        <!-- Language section (when language is selected) -->
+        
         <section class="vertical-scroll" id="language" style="display: none;">
             <h2>Learn a new language</h2>
             <ul></ul>
@@ -256,6 +228,7 @@
             <ul></ul>
         </section>        
      </template>
+
      <template id="template-movie-details">
         <article id="movie">
             <h2><animated-loading elements="2"></animated-loading></h2>
@@ -263,11 +236,12 @@
             <header>
                 <img src="" alt="Poster">
                 <youtube-embed id="trailer">YouTube loading...</youtube-embed>
+                
                 <section id="actions" data-id="">
                     <dl id="metadata">
                     </dl>
-                    <button id="btnFavorites">Add to Favorites</button>
-                    <button id="btnWatchlist">Add to Watchlist</button>    
+                    <button type="button" id="btnFavorites">Add to Favorites</button>
+                    <button type="button" id="btnWatchlist">Add to Watchlist</button>    
                 </section>
             </header>
             <ul id="genres"></ul>
@@ -275,6 +249,7 @@
             <ul id="cast"></ul>
         </article>
     </template>
+
     <template id="template-movies">
         <section>
             <div id="search-header">
@@ -299,11 +274,6 @@
         </section>
     </template>
 
-    <!-- ========================================== -->
-    <!-- 👤 USER AUTHENTICATION TEMPLATES -->
-    <!-- ========================================== -->
-    
-    <!-- 📝 REGISTRATION FORM -->
     <template id="template-register">
         <section>
             <h2>Register a New Account</h2>
@@ -328,7 +298,6 @@
         </section>
     </template>
 
-    <!-- 🔐 LOGIN FORM -->
     <template id="template-login">
         <section>
             <h2>Log in</h2>
@@ -343,6 +312,14 @@
                 <button>Log In</button>
                 <button type="button" onclick="app.loginWithPasskey()">Login with Passkey</button>
 
+                <div id="email-verification-status" style="display: none; margin: 10px 0; padding: 10px; background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px;">
+                    <p style="margin: 0; color: #856404;">⚠️ Your email is not verified. Please check your email for a verification link.</p>
+                    <button type="button" onclick="app.resendVerification()" style="margin-top: 5px; background-color: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Resend Verification Email</button>
+                </div>
+
+                <div style="margin: 10px 0;">
+                    <a href="javascript:void(0)" onclick="app.showForgotPassword()" style="color: #007bff; text-decoration: none;">Forgot your password?</a>
+                </div>
 
                 <p>If you don't have an account, please 
                     <a href="/account/register">register</a>.</p>
@@ -350,10 +327,46 @@
         </section>
     </template>
 
-    <!-- 👤 ACCOUNT DASHBOARD -->
+    <template id="template-forgot-password">
+        <section>
+            <h2>Reset Your Password</h2>
+            <form onsubmit="app.forgotPassword(event)">
+                <p>Enter your email address and we'll send you a link to reset your password.</p>
+                
+                <label for="forgot-email">E-mail</label>
+                <input id="forgot-email" required type="email" autocomplete="email">
+                
+                <button type="submit">Send Reset Link</button>
+                <button type="button" onclick="app.Router.go('/account/login')">Back to Login</button>
+            </form>
+        </section>
+    </template>
+
+    <template id="template-reset-password">
+        <section>
+            <h2>Set New Password</h2>
+            <form onsubmit="app.resetPassword(event)">
+                <p>Enter your new password below.</p>
+                
+                <label for="reset-password">New Password</label>
+                <input id="reset-password" required type="password" autocomplete="new-password" minlength="7">
+                
+                <label for="reset-password-confirm">Confirm New Password</label>
+                <input id="reset-password-confirm" required type="password" autocomplete="new-password" minlength="7">
+                
+                <button type="submit">Reset Password</button>
+                <button type="button" onclick="app.Router.go('/account/login')">Back to Login</button>
+            </form>
+        </section>
+    </template>
+
     <template id="template-account">
         <section id="account">
             <h2>You are Logged In</h2>
+
+            <div id="account-email-status" style="margin: 10px 0; padding: 10px; background-color: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px;">
+                <p style="margin: 0; color: #155724;">✅ Your email is verified</p>
+            </div>
 
             <button onclick="app.logout()">Log out</button>
             <button onclick="app.Router.go('/account/favorites')">Your Favorites</button>
@@ -362,7 +375,6 @@
         </section>
     </template>
 
-    <!-- 📚 COLLECTION PAGES -->
     <template id="template-collection">
         <section>
             <ul id="movies-result">
@@ -373,10 +385,9 @@
         </section>
     </template>
 
-    <!-- 🔥 PHOENIX MANIFESTO PAGE -->
     <template id="template-manifesto">
         <section class="phoenix-manifesto-page">
-            <!-- Phoenix Background Elements -->
+            
             <div class="phoenix-bg-elements">
                 <div class="phoenix-flame phoenix-flame-1"></div>
                 <div class="phoenix-flame phoenix-flame-2"></div>
@@ -385,8 +396,7 @@
                 <div class="phoenix-ember phoenix-ember-2"></div>
                 <div class="phoenix-ember phoenix-ember-3"></div>
             </div>
-            
-            <!-- Manifesto Header -->
+
             <div class="manifesto-page-header">
                 <h1 class="phoenixflix-brand"><img src="/images/PhoenixFlix.jpeg" alt="PhoenixFlix Logo" class="manifesto-title-logo"> <span class="manifesto-theme-text">The</span> <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> <span class="manifesto-theme-text">Manifesto</span></h1>
                 <div class="phoenix-flame-icon">
@@ -400,8 +410,7 @@
                     </button>
                 </div>
             </div>
-            
-            <!-- Main Manifesto Content -->
+
             <div class="manifesto-page-content">
                 <div class="manifesto-text-content">
                     <div class="manifesto-intro-section">
@@ -433,11 +442,7 @@
                                 <h4>Secure Authentication</h4>
                                 <p>Passkey-based security for your peace of mind</p>
                             </div>
-                            <!-- <div class="feature-card">
-                                <div class="feature-icon">💬</div>
-                                <h4>Community Forum</h4>
-                                <p>Connect with like-minded individuals for discussion</p>
-                            </div> -->
+                            
                         </div>
                     </div>
                     
@@ -451,8 +456,7 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Phoenix Letter Standalone Section -->
+
             <div class="manifesto-phoenix-letter-section">
                 <div class="manifesto-phoenix-letter-container">
                     <img src="/images/Phoenix_Letter.png" alt="The PhoenixFlix Manifesto Letter" class="manifesto-phoenix-letter-image">
@@ -461,7 +465,6 @@
         </section>
     </template>
 
-    <!-- 🏛️ LDS CONTENT PAGE -->
     <template id="template-lds">
         <section class="lds-page">
             <div class="lds-header">
@@ -473,8 +476,7 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Hardcoded Disclaimer Section for LDSPage -->
+
             <section class="lds-page-disclaimer">
                 <div class="disclaimer-header">
                     <h3>📚 Educational Collection & Personal Study</h3>
@@ -525,21 +527,7 @@
                     </div>
                 </div>
             </section>
-            
-            <!-- Daily Features (GetTopLDS) - COMMENTED OUT -->
-            <!--
-            <section class="lds-section">
-                <h2>Daily Features</h2>
-                <div class="horizontal-scroll-container">
-                    <ul id="lds-daily-features" class="horizontal-scroll-list">
-                        <animated-loading data-elements="3" data-width="200px" data-height="300px">
-                        </animated-loading>
-                    </ul>
-                </div>
-            </section>
-            -->
 
-            <!-- LDS Features (GetLDSContent with search) -->
             <section class="lds-section">
                 <h2>🎺LDS Features</h2>
                 <div class="horizontal-scroll-container">
@@ -550,7 +538,6 @@
                 </div>
             </section>
 
-            <!-- Bible Videos (GetRandomLDS) -->
             <section class="lds-section">
                 <h2>📖 Bible Videos</h2>
                 <div class="horizontal-scroll-container">
@@ -561,7 +548,6 @@
                 </div>
             </section>
 
-            <!-- Christian Songs (GetRandomLDS) -->
             <section class="lds-section">
                 <h2>🎤 Christian Songs</h2>
                 <div class="horizontal-scroll-container">
@@ -574,7 +560,6 @@
         </section>
     </template>
 
-    <!-- 🎬 LDS CONTENT DETAIL PAGE -->
     <template id="template-lds-detail">
         <article id="lds-content" class="lds-detail-page">
             <div class="lds-detail-header">
@@ -629,10 +614,7 @@
                             <span id="lds-duration" class="stat-value">0 min</span>
                         </div>
                     </div>
-                    
-                    <!-- ========================================== -->
-                    <!-- 📜 EDUCATIONAL DISCLAIMER SECTION -->
-                    <!-- ========================================== -->
+
                     <div class="lds-content-disclaimer">
                         <div class="disclaimer-header">
                             <h3>📚 Educational Collection & Personal Study</h3>
@@ -688,9 +670,6 @@
         </article>
     </template>
 
-    <!-- ========================================== -->
-    <!-- 🔥 PHOENIX MANIFESTO TEASER -->
-    <!-- ========================================== -->
      <section class="phoenix-teaser-section">
         <div class="phoenix-teaser-container">
             <div class="phoenix-teaser-content">
@@ -715,18 +694,43 @@
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- 🦶 FOOTER SECTION -->
-    <!-- ========================================== -->
     <footer>
-        <p>(C) <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> ::: https://github.com/PhoenixWeaver ::: </p>
-        <p>© 2025, Ben Tran. All rights reserved.</p>
-        
-        <!-- Handwritten Disclaimer -->
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="/images/PhoenixFlix.jpeg" alt="PhoenixFlix Logo" class="footer-logo-img">
+                </div>
+                <div class="footer-brand-text">
+                    <h3 class="footer-title">
+                        <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span>
+                    </h3>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-section">
+                    <a href="https://github.com/PhoenixWeaver" target="_blank" class="footer-link">
+                        <span class="link-icon">🐙</span> https://github.com/PhoenixWeaver
+                    </a>
+                </div>
+                
+                <div class="footer-section">
+                    <p class="copyright-text">
+                        © 2025 <span class="phoenix-text">Phoenix</span><span class="flix-text">Flix</span> Ben Tran. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <div class="footer-disclaimer">
             <p class="handwritten-text">Not a missionary. Not a leader. Just a loner convert.</p>
             <p class="handwritten-text">Not a hero. Not a programmer. Just a fun goer.</p>
         </div>
+        
+        <div class="footer-flames">
+            
+        </div>
     </footer>
 </body>
 </html>
+

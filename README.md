@@ -3,6 +3,12 @@
 
 # 🎬 PhoenixFlix - Movies & LDS Content Platform
 
+> **🚀 Ready to Deploy V2?** Start here: **[START_HERE.md](START_HERE.md)** - Quick deployment guide
+> 
+> **📚 Deployment Guides:** All guides in **[BT_Builder/Deployment_V2/](BT_Builder/Deployment_V2/)** folder
+> 
+> **⭐ Recommended:** Fresh Repository deployment (Option A) for clean V2
+
 ## 🌟 **Vision & Inspiration**
 
 **PhoenixFlix** represents a groundbreaking fusion of entertainment and spirituality - a platform where families can enjoy both secular entertainment and uplifting Christian content under one roof. Born from the vision of creating a **Netflix of the Phoenix**, this platform bridges the gap between modern streaming technology and timeless spiritual values.
@@ -38,16 +44,23 @@ This is a **full-stack, production-ready application** that demonstrates mastery
 #### **🔐 Security & Authentication**
 - ✅ **Modern Passwordless Auth**: WebAuthn/Passkeys implementation
 - ✅ **JWT Token System**: Secure session management with 72-hour expiration
+- ✅ **Email Verification**: Token-based email confirmation system with 24-hour expiry
+- ✅ **Password Reset**: Secure password reset via email tokens with 1-hour expiry
+- ✅ **SMTP Integration**: Production-grade email delivery via Vercel CDN
 - ✅ **Admin Role System**: Complete admin middleware with database-level permissions
 - ✅ **SQL Injection Prevention**: Parameterized queries throughout
 - ✅ **Input Validation**: Comprehensive data validation and sanitization
+- ✅ **Rate Limiting**: Email bombing and brute force protection
+- ✅ **Race Condition Prevention**: Optimistic locking with version control
 
 #### **📊 Database Engineering**
-- ✅ **Dual PostgreSQL Setup**: Movies database + Christian content database (Bible videos, Christian songs, LDS content)
+- ✅ **Dual PostgreSQL Setup**: Movies database (Neon) + Christian content database (Aiven)
+- ✅ **Optimistic Locking**: Version-based concurrency control for race condition prevention
 - ✅ **Cross-Database Relationships**: Bridge tables for unified user collections
 - ✅ **Data Import Systems**: Automated TMDB and YouTube content integration
 - ✅ **User Management**: Complete CRUD operations with soft deletes
 - ✅ **Guestbook System**: Full moderation and approval workflow
+- ✅ **Transaction Safety**: ACID-compliant operations with rollback support
 
 #### **🎨 Frontend Development**
 - ✅ **Vanilla JavaScript SPA**: Modern single-page application
@@ -68,6 +81,9 @@ This is a **full-stack, production-ready application** that demonstrates mastery
 - ✅ **Logging System**: Custom structured logging for movies and LDS
 - ✅ **Build System**: Single binary deployment ready
 - ✅ **Git Integration**: Version control with comprehensive .gitignore
+- ✅ **Cloud Deployment**: Render (Backend) + Vercel (Frontend/CDN)
+- ✅ **Database Hosting**: Neon + Aiven PostgreSQL with auto-scaling
+- ✅ **CI/CD Pipeline**: Automatic deployment on git push
 
 ### **📈 Project Statistics**
 - **📁 Files**: 50+ Go files, 20+ JavaScript components
@@ -79,11 +95,15 @@ This is a **full-stack, production-ready application** that demonstrates mastery
 
 ### **🎖️ Technical Innovation**
 This project showcases several **innovative approaches**:
-1. **Dual Database Architecture**: Unique separation of secular movies and Christian content
+1. **Dual Database Architecture**: Unique separation of secular movies and Christian content (Neon + Aiven)
 2. **Cross-Database User Collections**: Users can favorite content from both databases
 3. **Modern Authentication**: WebAuthn implementation for passwordless login
 4. **Hybrid Rendering**: SSR for SEO + SPA for modern UX
 5. **Admin Moderation System**: Complete content management workflow
+6. **Optimistic Locking**: Race condition prevention with version-based concurrency control
+7. **Advanced Account Management**: Comprehensive email verification and password reset system
+8. **Distributed Infrastructure**: Render (Backend) + Vercel (Frontend/Email CDN) architecture
+9. **Go Routines**: Efficient concurrent request handling with safe database operations
 
 ## ✨ Features
 
@@ -106,6 +126,8 @@ This project showcases several **innovative approaches**:
 ### 👤 User Management
 - **Modern Authentication**: WebAuthn/Passkey (passwordless)
 - **JWT Tokens**: Secure session management
+- **Email Verification**: Token-based email confirmation with 24-hour expiry
+- **Password Reset**: Secure password reset via email tokens with 1-hour expiry
 - **Cross-Database Collections**: Users can favorite both movies and Christian content
 - **Admin System**: Full admin panel with moderation capabilities
 - **Guestbook**: Community interaction features
@@ -115,18 +137,15 @@ This project showcases several **innovative approaches**:
 ### **Backend**
 - **Language**: Go 1.25+
 - **Architecture**: Clean Architecture with Repository Pattern
-- **Database**: Neon PostgreSQL + Dual PostgreSQL (AIVEN) - Movies + Christian Content
-- **Middleware**: Authentication, admin, and logging
-- **Handler Pattern**: Clean HTTP request processing
-- **Cloud Application**: Render + Neon + Vercel
-     
-### **Frontend**
-- **Technology**: Vanilla JavaScript SPA
+- **Database**: Dual PostgreSQL (NEON + AIVEN) - Movies + Christian Content
+- **Hosting**: Render (Backend API)
 - **Authentication**: JWT + WebAuthn/Passkeys
 - **APIs**: TMDB, YouTube
+- **Concurrency**: Go Routines with Optimistic Locking for race condition prevention
 
 ### **Frontend**
 - **Technology**: Vanilla JavaScript SPA
+- **Hosting**: Vercel (Frontend & Email CDN)
 - **Features**: Server-Side Rendering (SSR) capabilities
 - **Responsive**: Mobile-first design
 - **PWA**: Progressive Web App features
@@ -136,13 +155,50 @@ This project showcases several **innovative approaches**:
 - **Christian Content Database**: Bible videos, Christian songs, LDS content, spiritual ratings
 - **Cross-Database**: Bridge tables for unified user experience
 
+### **🔒 Race Condition Prevention with Optimistic Locking**
+
+PhoenixFlix implements **optimistic locking** to handle concurrent database operations safely, preventing race conditions in multi-user scenarios.
+
+#### **Key Features**
+- **Version-Based Concurrency Control**: Each user record includes a `version` field that increments on updates
+- **Atomic Operations**: Database updates verify version matches before committing
+- **Conflict Detection**: Automatically detects and handles concurrent modification attempts
+- **Retry Logic**: Smart retry mechanism for failed operations due to version conflicts
+
+#### **Implementation Highlights**
+- **Go Routines**: Efficient concurrent request handling
+- **Database Transactions**: ACID-compliant operations with version checking
+- **Error Handling**: Graceful degradation when conflicts occur
+- **Performance**: Minimal overhead while ensuring data integrity
+
+#### **Use Cases**
+- User profile updates by multiple devices
+- Simultaneous favorite/watchlist modifications
+- Concurrent guestbook submissions
+- Admin moderation actions
+
+![Optimistic Locking Sequence Diagram](BT_OutputSamples/Optimistic_Locking_Sequence_Diagram.png)
+*Figure 1: Optimistic locking sequence for concurrent user updates*
+
+![Optimistic Locking Flowchart](BT_OutputSamples/Optimistic_Locking_Flowchart.png)
+*Figure 2: Flowchart showing version-based conflict resolution*
+
+For detailed implementation, see: `BT_Builder/GoRoutines_Builder/`
+
 ## 🚀 Quick Start
+
+> **📘 For Production Deployment:** See [BT_Builder/Deployment_V2/FULL_V2_MIGRATION_GUIDE.md](BT_Builder/Deployment_V2/FULL_V2_MIGRATION_GUIDE.md) for complete deployment (Option A recommended)
+
+> **⚡ Quick Environment Switch:** Use `.\switch-environment.ps1 local` or `.\switch-environment.ps1 production` to toggle configurations
+
+> **📝 All Deployment Guides:** Located in [BT_Builder/Deployment_V2/](BT_Builder/Deployment_V2/) folder
 
 ### Prerequisites
 - Go 1.25+
-- PostgreSQL (or PostgreSQL)
+- PostgreSQL (Neon + Aiven recommended)
 - TMDB API Key
 - YouTube API Key (for Christian content)
+- Air (for local development with live reload)
 
 ### Installation
 
@@ -164,6 +220,16 @@ DATABASE_URL=postgres://username:password@host:port/database?sslmode=require
 DATABASE_URL_CHRISTIAN=postgres://username:password@host:port/database?sslmode=require
 TMDB_API_KEY=your_tmdb_api_key
 YOUTUBE_API_KEY=your_youtube_api_key
+JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+ENVIRONMENT=production
+
+# SMTP / Email (for verification and password reset)
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USER=apikey_or_username
+SMTP_PASS=your_smtp_password
+SMTP_FROM=PhoenixFlix <no-reply@phoenixflix.app>
+SMTP_TLS=true
 ```
 
 4. **Run the application**
@@ -225,6 +291,10 @@ PhoenixFlix/
 ### Authentication
 - `POST /api/account/register` - User registration
 - `POST /api/account/authenticate` - User login
+- `GET /api/account/confirm?token=...` - Email verification
+- `POST /api/account/forgot-password` - Request password reset
+- `POST /api/account/reset-password` - Reset password with token
+- `POST /api/account/resend-verification` - Resend verification email (auth required)
 - `POST /api/passkey/authentication-begin` - Passkey login start
 - `POST /api/passkey/authentication-end` - Passkey login complete
 
@@ -233,28 +303,100 @@ PhoenixFlix/
 - `DELETE /api/admin/guestbook/delete/{id}` - Delete entry
 - `PUT /api/admin/guestbook/approve/{id}` - Approve entry
 
-## 🛡️ Security Features
+## 📧 Advanced Account Management
 
-- **JWT Authentication**: Secure token-based authentication
-- **WebAuthn/Passkeys**: Modern passwordless authentication
-- **Admin Middleware**: Role-based access control
-- **SQL Injection Prevention**: Parameterized queries
-- **CORS Protection**: Cross-origin request security
-- **Input Validation**: Comprehensive data validation
+PhoenixFlix implements a comprehensive account management system with enterprise-level security features.
+
+![Account Management Architecture](BT_OutputSamples/Architecture_AccountManagement.png)
+*Figure 3: Complete account management architecture*
+
+### **Email Verification Flow**
+1. **User Registration**: User registers with email and password
+2. **Verification Token**: System creates a secure token (24-hour expiry)
+3. **Email Sent**: Verification email sent via Vercel CDN with confirmation link
+4. **Email Confirmation**: User clicks link to verify email address
+5. **Account Activated**: User account is fully activated
+
+### **Password Reset Flow**
+1. **Reset Request**: User requests password reset via email
+2. **Reset Token**: System creates a secure token (1-hour expiry)
+3. **Reset Email**: Password reset email sent with secure link via Vercel CDN
+4. **Password Update**: User sets new password via token
+5. **Account Secured**: Password is updated and token invalidated
+
+![Authentication Flow](BT_OutputSamples/Authentication_Flow.png)
+*Figure 4: Complete authentication flow including email verification and password reset*
+
+### **Email Infrastructure**
+- **SMTP Integration**: Production-grade email delivery system
+- **Content Delivery**: Vercel CDN for email template delivery
+- **Template System**: Professional HTML email templates
+- **Delivery Tracking**: Email verification status monitoring
+- **Error Handling**: Comprehensive SMTP error management
+
+### **Security Features**
+- **Token Expiry**: Verification tokens expire in 24 hours, reset tokens in 1 hour
+- **Single Use**: Tokens are invalidated after use
+- **Email Enumeration Protection**: Always returns success to prevent email discovery
+- **Secure Generation**: Cryptographically secure random tokens (32+ bytes)
+- **Database Storage**: Tokens stored securely with user association
+- **Rate Limiting**: Protection against email bombing attacks
+- **HTTPS Only**: All email links use secure HTTPS protocol
+
+### **Additional Account Features**
+- **Email Re-verification**: Users can request new verification emails
+- **Account Recovery**: Multi-step password recovery process
+- **Session Management**: JWT-based session with 72-hour validity
+- **Device Tracking**: Last login timestamp for security monitoring
+- **Soft Deletes**: Account data preserved for recovery
+
+For detailed implementation, see: `BT_Builder/AccManagement_BUIDER/`
 
 ## 🚀 Deployment
 
-### PhoenixFlix domain (Recommended)
-1. Push code to GitHub
-2. Connect repository to PhoenixFlix app
-3. Add environment variables
-4. Deploy automatically
+### **Production Infrastructure**
 
-### PhoenixFlix Alias (Optional)
-1. Connect GitHub repository
-2. Configure build settings
-3. Add environment variables
-4. Deploy Go application
+PhoenixFlix uses a modern, distributed deployment architecture:
+
+#### **Backend Deployment (Render)**
+- **Platform**: Render.com
+- **Service Type**: Web Service
+- **Runtime**: Go 1.25+
+- **Database**: PostgreSQL (Neon + Aiven)
+- **Auto-Deploy**: Automatic deployment from main branch
+
+**Deployment Steps:**
+1. Push code to GitHub repository
+2. Connect repository to Render
+3. Configure environment variables (see `.env` template)
+4. Set build command: `go build -o main .`
+5. Set start command: `./main`
+6. Deploy automatically
+
+#### **Frontend Deployment (Vercel)**
+- **Platform**: Vercel.com
+- **Framework**: Vanilla JavaScript SPA
+- **CDN**: Global edge network
+- **Email Templates**: Served via Vercel CDN
+- **SSL**: Automatic HTTPS
+
+**Deployment Steps:**
+1. Push frontend code to GitHub
+2. Import project to Vercel
+3. Configure build settings
+4. Add environment variables
+5. Deploy to production
+
+#### **Database Providers**
+- **Neon PostgreSQL**: Modern serverless PostgreSQL
+  - Auto-scaling
+  - Branch-based development
+  - Built-in connection pooling
+  
+- **Aiven PostgreSQL**: Enterprise-grade database hosting
+  - High availability
+  - Automatic backups
+  - Cross-region replication
 
 ### Docker
 ```dockerfile
@@ -311,7 +453,10 @@ This project was born from a desire to create a **family-friendly alternative** 
 - **YouTube API**: Enabling seamless integration of Christian content including Bible videos, Christian songs, and LDS content
 - **YouTube Content Creators**: For providing uplifting Christian content, Bible teachings, and inspirational music
 - **Christian Community**: For inspiring content that strengthens faith and family values
-- **AIVEN**: Reliable PostgreSQL hosting for both movie and Christian content databases
+- **Neon**: Modern serverless PostgreSQL with auto-scaling and branch-based development
+- **Aiven**: Enterprise-grade PostgreSQL hosting with high availability and automatic backups
+- **Render**: Reliable backend hosting platform with automatic deployment
+- **Vercel**: Frontend and Email CDN hosting with global edge network
 - **Go Community**: For excellent libraries and frameworks that made this possible
 
 ### **💡 Special Recognition**
@@ -319,6 +464,78 @@ This project was born from a desire to create a **family-friendly alternative** 
 - **PostgreSQL Community**: For robust database technology
 - **Open Source Contributors**: Whose work enables modern web development
 - **Faith-Based Communities**: For inspiring the need for wholesome entertainment platforms
+
+## 📸 Screenshots & Documentation
+
+PhoenixFlix includes comprehensive visual documentation of all major features and architectures.
+
+### **📚 Deployment & Development Guides**
+
+All deployment guides are organized in **[BT_Builder/Deployment_V2/](BT_Builder/Deployment_V2/)** folder:
+
+- **[FULL_V2_MIGRATION_GUIDE.md](BT_Builder/Deployment_V2/FULL_V2_MIGRATION_GUIDE.md)** ⭐: Complete V2 deployment guide
+  - **Option A (Recommended)**: Fresh repository for clean V2
+  - **Option B**: Update existing repository
+  - Database migration procedures
+  - Testing checklist and troubleshooting
+
+- **[DEPLOYMENT_GUIDE_V2.md](BT_Builder/Deployment_V2/DEPLOYMENT_GUIDE_V2.md)**: Configuration reference
+  - Render and Vercel setup
+  - Environment variables
+  - Quick deployment steps
+
+- **[PRODUCTION_CHANGES_CHECKLIST.md](BT_Builder/Deployment_V2/PRODUCTION_CHANGES_CHECKLIST.md)**: Quick reference
+  - 3 files that need modification
+  - Find/replace patterns
+  - Verification checklist
+
+- **[V2_UPDATE_SUMMARY.md](BT_Builder/Deployment_V2/V2_UPDATE_SUMMARY.md)**: What's new in V2
+  - All changes and improvements
+  - V1 vs V2 comparison
+
+**Automation Tools** (in root directory):
+- **[switch-environment.ps1](switch-environment.ps1)**: Automated environment switcher
+  - Usage: `.\switch-environment.ps1 production` or `.\switch-environment.ps1 local`
+  - Automatically updates all necessary files
+  - No manual editing required!
+
+- **[check-changes.ps1](check-changes.ps1)**: See all your changes
+  - Shows modified files by category
+  - Checks current configuration
+  - Provides recommendations
+
+### **Architecture Diagrams**
+Located in `BT_OutputSamples/`:
+- **Optimistic_Locking_Sequence_Diagram.png**: Detailed sequence diagram for concurrent operations
+- **Optimistic_Locking_Flowchart.png**: Visual flowchart of race condition prevention
+- **Architecture_AccountManagement.png**: Complete account management architecture
+- **Authentication_Flow.png**: Full authentication flow including email verification
+
+### **Application Screenshots**
+Located in `BT_OutputSamples/PhoenixFlix_OutputSamples/`:
+
+#### **Desktop (PC)**
+- Homepage and navigation
+- Movie browsing and search
+- LDS content section
+- Authentication flows (login, registration, passkeys)
+- Admin moderation panel
+- Guestbook features
+- Favorites and watchlist
+
+#### **Mobile (iOS & Android)**
+- Responsive design on mobile devices
+- Touch-optimized interface
+- Biometric authentication (Face ID, Touch ID)
+- Progressive Web App installation
+- Cross-platform consistency
+
+### **Email Features**
+- Password reset email templates
+- Email verification confirmations
+- Professional SMTP integration
+
+All diagrams and screenshots demonstrate production-ready features with enterprise-level polish.
 
 ## 📞 Support
 
@@ -333,7 +550,7 @@ For support and questions:
 **PhoenixFlix** represents more than just a technical achievement - it's a **vision realized**. In a digital age where content often compromises values, this platform stands as a testament to what's possible when technology serves faith, family, and community.
 
 **Built with ❤️, faith, and cutting-edge technology**  
-*Go • PostgreSQL • WebAuthn • Clean Architecture • Family Values*
+*Go • PostgreSQL (Neon + Aiven) • Render • Vercel • WebAuthn • Clean Architecture • Family Values*
 
 ---
 

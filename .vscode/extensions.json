@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "golang.go",
+    "bierner.markdown-mermaid",
+    "ms-vscode.vscode-json-editor",
+    "shd101wyy.markdown-preview-enhanced",
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-pg"
+  ]
+}
+

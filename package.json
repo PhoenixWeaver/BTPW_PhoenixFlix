@@ -1,0 +1,40 @@
+{
+  "name": "phoenixflix",
+  "version": "1.0.0",
+  "description": "PhoenixFlix - Multi-Purpose Movies & Christian Streaming Platform",
+  "author": "Ben Tran (PhoenixWeaver)",
+  "license": "MIT",
+  "scripts": {
+    "docs:mermaid": "mmdc -i docs/architecture.md -o docs/architecture-diagrams.png -t dark -b transparent",
+    "docs:database": "powershell -ExecutionPolicy Bypass -File tools/generate-docs.ps1",
+    "docs:api": "go doc -all > docs/api-reference.txt",
+    "docs:serve": "pkgsite -open",
+    "docs:generate": "npm run docs:mermaid && npm run docs:api",
+    "setup:schemaspy": "powershell -ExecutionPolicy Bypass -File tools/setup-schemaspy.ps1",
+    "dev": "go run main.go",
+    "build": "go build -o bin/phoenixflix.exe main.go",
+    "test": "go test ./...",
+    "fmt": "go fmt ./...",
+    "vet": "go vet ./...",
+    "tidy": "go mod tidy",
+    "install:mermaid": "npm install -g @mermaid-js/mermaid-cli",
+    "install:godoc": "go install golang.org/x/pkgsite/cmd/pkgsite@latest",
+    "install:all": "npm run install:mermaid && npm run install:godoc && npm run setup:schemaspy"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^10.6.1"
+  },
+  "keywords": [
+    "streaming",
+    "movies",
+    "go",
+    "postgresql",
+    "webauthn",
+    "jwt"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PhoenixWeaver/PhoenixFlix"
+  }
+}
+

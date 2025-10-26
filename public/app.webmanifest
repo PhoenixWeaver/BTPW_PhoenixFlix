@@ -1,0 +1,17 @@
+{
+    "name": "PhoenixFlix",
+    "short_name": "PhoenixFlix",
+    "theme_color": "silver",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "background_color": "#56bce8",
+    "description": "::: PhoenixFlix - Multi-Purpose Movies & Christian Streaming Platform ::: The ultimate app for movie and Christian content lovers: discover trailers, reviews, showtimes, and more !",
+    "icons": [
+        {
+            "src": "images/icon.png",
+            "sizes": "1024x1024",
+            "type": "image/png"
+        }
+    ]
+}
