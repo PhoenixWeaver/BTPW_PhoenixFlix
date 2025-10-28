@@ -20,9 +20,9 @@ import (
 
 	// 	"strings"
 
-	"GoVanilla/data"
-	"GoVanilla/handlers"
-	"GoVanilla/logger"
+	"PhoenixFlix/data"
+	"PhoenixFlix/handlers"
+	"PhoenixFlix/logger"
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
@@ -276,6 +276,3 @@ func main() {
 		logInstance.Error("Server failed", err)
 	}
 }
-
-
-
