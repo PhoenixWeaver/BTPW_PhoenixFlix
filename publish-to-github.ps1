@@ -10,7 +10,7 @@ Write-Host ""
 
 # Configuration
 $repoUrl = "https://github.com/thephoenixflix/BTPW_thephoenixflix.git"
-$branch = "main"
+$branch = "master"
 
 # Step 1: Check current status
 Write-Host "[Step 1] Checking current git status..." -ForegroundColor Yellow
@@ -106,7 +106,7 @@ if ($LASTEXITCODE -eq 0) {
         Write-Host "===============================================================================" -ForegroundColor Green
         Write-Host ""
         Write-Host "[WEB] View your repository at:" -ForegroundColor Cyan
-        Write-Host "   https://github.com/thephoenixflix/thephoenixflix" -ForegroundColor White
+        Write-Host "   https://github.com/thephoenixflix/BTPW_thephoenixflix" -ForegroundColor White
         Write-Host ""
         Write-Host "[INFO] Repository is set to PRIVATE" -ForegroundColor Yellow
         Write-Host "   To make it public: Settings -> Danger Zone -> Change visibility" -ForegroundColor Gray
@@ -118,7 +118,7 @@ if ($LASTEXITCODE -eq 0) {
         Write-Host "===============================================================================" -ForegroundColor Red
         Write-Host ""
         Write-Host "[TIP] Try manual push:" -ForegroundColor Yellow
-        Write-Host "   git push -u origin main --force" -ForegroundColor Gray
+        Write-Host "   git push -u origin master --force" -ForegroundColor Gray
         Write-Host ""
     }
 } else {
@@ -138,13 +138,15 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host ""
     Write-Host "Option 2: Use SSH instead" -ForegroundColor Cyan
     Write-Host "   git remote set-url origin git@github.com:thephoenixflix/thephoenixflix.git" -ForegroundColor Gray
-    Write-Host "   git push -u origin main" -ForegroundColor Gray
+    Write-Host "   git push -u origin master" -ForegroundColor Gray
     Write-Host ""
     Write-Host "Option 3: Use GitHub CLI" -ForegroundColor Cyan
     Write-Host "   gh auth login" -ForegroundColor Gray
-    Write-Host "   git push -u origin main" -ForegroundColor Gray
+    Write-Host "   git push -u origin master" -ForegroundColor Gray
     Write-Host ""
 }
+
+# check to change the branch name to main
 
 # # Remove old remote
 # git remote remove origin
@@ -153,7 +155,7 @@ if ($LASTEXITCODE -eq 0) {
 # git remote add origin https://YOUR_GITHUB_USERNAME@github.com/thephoenixflix/thephoenixflix.git
 
 # # Push (will ask for token)
-# git push -u origin main
+# git push -u origin master
 
 # # Step 1: Check status
 # git status
@@ -165,9 +167,9 @@ if ($LASTEXITCODE -eq 0) {
 # git commit -m "feat: clean codebase with PhoenixFlix branding and remove comments"
 
 # # Step 4: Set remote (if not already set)
-# git remote add origin https://github.com/thephoenixflix/thephoenixflix.git
+# git remote add origin https://github.com/thephoenixflix/BTPW_thephoenixflix.git
 # # OR update existing remote:
-# git remote set-url origin https://github.com/thephoenixflix/thephoenixflix.git
+# git remote set-url origin https://github.com/thephoenixflix/BTPW_thephoenixflix.git
 
 # # Step 5: Push to GitHub
-# git push -u origin main
+# git push -u origin master
