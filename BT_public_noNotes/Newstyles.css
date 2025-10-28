@@ -1,0 +1,77 @@
+/*
+===============================================================================
+🐦 ::: PhoenixFlix - Multi-Purpose Movies & Christian Streaming Platform :::
+🔥 with dual database architecture, WebAuthn authentication, and family-friendly streaming experience.
+===============================================================================
+Author: Ben Tran (https://github.com/PhoenixWeaver)
+Email: thephoenixflix@gmail.com
+Website: https://bit.ly/thephoenixflix
+===============================================================================
+*/
+
+@import url('./styles/variables.css');
+
+@import url('./styles/base.css');
+
+@import url('./styles/layout.css');
+
+@import url('./styles/components.css');
+
+@import url('./styles/pages-movies.css');
+@import url('./styles/pages-lds.css');
+@import url('./styles/pages-other.css');
+
+@import url('./styles/language-features.css');
+
+.hidden { display: none !important; }
+.visible { display: block !important; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+@media (max-width: 768px) {
+    .mobile-hidden { display: none !important; }
+    .mobile-visible { display: block !important; }
+}
+
+@media (min-width: 769px) {
+    .desktop-hidden { display: none !important; }
+    .desktop-visible { display: block !important; }
+}
+
+@font-face {
+    font-family: 'Comic Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Comic Neue'), url('https://fonts.gstatic.com/s/comicneue/v3/4UaHrEJCrhhnVA3Fgls9zH8.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Comic Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: local('Comic Neue Bold'), url('https://fonts.gstatic.com/s/comicneue/v3/4UaGrEJCrhhnVA3FGlJ9zH8.ttf') format('truetype');
+}
+
+@media screen and (max-width: 768px) {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.phoenixflix-brand {
+    font-family: 'Comic Neue', cursive;
+    font-weight: 700;
+    color: var(--secondaryColor, #ff6b35);
+}
+
