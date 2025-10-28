@@ -9,7 +9,7 @@ Write-Host "====================================================================
 Write-Host ""
 
 # Configuration
-$repoUrl = "https://github.com/thephoenixflix/thephoenixflix.git"
+$repoUrl = "https://github.com/thephoenixflix/BTPW_thephoenixflix.git"
 $branch = "main"
 
 # Step 1: Check current status
