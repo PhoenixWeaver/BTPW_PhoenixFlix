@@ -146,7 +146,7 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host ""
 }
 
-# check to change the branch name to main
+# check to change the branch name to main or master
 
 # # Remove old remote
 # git remote remove origin
